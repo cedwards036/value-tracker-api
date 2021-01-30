@@ -29,4 +29,4 @@ jobs:
         env:
           FLASK_ENV: development
           FLASK_APP: src\app
-          DATABASE_URL: ${{secret.STAGING_DB_URL}}
+          DATABASE_URL: ${{secrets.STAGING_DB_URL}}
