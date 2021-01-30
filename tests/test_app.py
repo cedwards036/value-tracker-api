@@ -19,15 +19,7 @@ def test_users(app, client):
     assert post_res.status_code == 201
     get_res = client.get("/users")
     assert get_res.status_code == 200
-    expected = {
-        "count": 1,
-        "users": [
-            {
-                "email": "testuser@email.com",
-                "joined_at_datetime": datetime.utcnow().strftime(
-                    "%a, %d %b %Y %H:%M:%S GMT"
-                ),
-            }
-        ],
-    }
-    assert expected == json.loads(get_res.get_data(as_text=True))
+    res_data = json.loads(get_res.get_data(as_text=True))
+    assert res_data["count"] == 1
+    assert res_data["users"][0]["email"] == "testuser@email.com"
+    assert res_data["users"][0]["joined_at_datetime"]  # check if it exists
